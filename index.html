@@ -69,6 +69,8 @@
     .section-body p, .section-body p * { color: #000 !important; text-decoration: none !important; background: none !important; }
     .section-body p:last-child { margin-bottom: 0; }
     .section-img { width: 100%; margin-top: 3rem; display: block; }
+    .section-img-row { display: flex; gap: 1rem; margin-top: 3rem; }
+    .section-img-row img { width: 50%; height: 280px; object-fit: cover; display: block; }
 
     /* PARCEL TABLE */
     .parcel-table { width: 100%; border-collapse: collapse; margin-top: 2rem; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .72rem; letter-spacing: .04em; color: #1a1a1a; }
@@ -180,8 +182,10 @@
     <h2>Parcel Schedule</h2>
     <span class="section-sub">12 lots &middot; 90.94 acres &middot; offered in full</span>
     <p>The Ridge is formed by three adjoining ownerships. Two buildings already stand on the land &mdash; one suited to a small conference center or technology hub, the other to a corporate office or private residence. A complete parcel schedule is provided to qualified buyers on request.</p>
-    <img src="land-1.webp" alt="" class="section-img">
-    <img src="land-2.png" alt="" class="section-img">
+    <div class="section-img-row">
+      <img src="land-1.webp" alt="">
+      <img src="land-2.png" alt="">
+    </div>
   </template>
 
   <template id="tpl-III">

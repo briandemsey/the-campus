@@ -1,0 +1,257 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Language" content="en">
+  <title>The Campus — A Private Offering · Spearfish, South Dakota</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --hero: url('hero.png');
+      --ivory:     #f6f2ea;
+      --ivory-dim: rgba(246, 242, 234, .82);
+      --bronze:    #c8a97e;
+      --dark:      #0e1512;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; background: var(--ivory); color: var(--dark); font-family: 'Cormorant Garamond', Georgia, serif; }
+
+    /* VIEWS */
+    .view { display: none; }
+    .view.active { display: block; }
+
+    /* HERO */
+    #view-hero { position: relative; height: 100vh; min-height: 600px; background: var(--dark); }
+    .hero-photo { position: absolute; inset: 0; background-image: var(--hero); background-size: cover; background-position: center 40%; }
+    .overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(14,21,18,.18) 0%, rgba(14,21,18,.52) 60%, rgba(14,21,18,.84) 100%); }
+    .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .9rem; }
+    .hero-enter { position: absolute; left: 0; bottom: 0; padding: 2.8rem 3.2rem; }
+    .eyebrow { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .95rem; letter-spacing: .28em; text-transform: uppercase; color: var(--bronze); }
+    .hero-content h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: clamp(3.2rem, 8vw, 6.4rem); line-height: 1; letter-spacing: .04em; color: var(--ivory); }
+    .place { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .95rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-dim); }
+    .lede { display: none; }
+    .cta { display: inline-block; margin-top: .4rem; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--ivory); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,.6); padding-bottom: 2px; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; transition: color .2s, border-color .2s; }
+    .cta:hover { color: var(--ivory); border-bottom-color: var(--ivory); }
+    .hero-foot { position: absolute; bottom: 2rem; left: 0; right: 0; text-align: center; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(246,242,234,.45); }
+
+    /* TOC */
+    #view-toc { min-height: 100vh; background: var(--ivory); padding: 5rem 0 4rem; }
+    .toc-inner { max-width: 640px; margin: 0 auto; padding: 0 2rem; }
+    .toc-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--dark); margin-bottom: .3rem; }
+    .toc-place { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: #999; }
+    .toc-rule { border: none; border-top: 1px solid #ddd; margin: 2rem 0; }
+    .toc-label { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: var(--bronze); text-align: center; display: block; margin-bottom: 1.8rem; }
+    .toc-list { list-style: none; }
+    .toc-list li { border-top: 1px solid #ddd; }
+    .toc-list li:last-child { border-bottom: 1px solid #ddd; }
+    .toc-list a { display: flex; align-items: baseline; gap: 1.5rem; padding: 1.2rem 0; text-decoration: none; color: inherit; transition: opacity .15s; }
+    .toc-list a:hover { opacity: .6; }
+    .toc-num { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .65rem; letter-spacing: .12em; color: var(--bronze); flex-shrink: 0; width: 1.8rem; }
+    .toc-name { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 300; font-size: 1.35rem; color: var(--dark); flex: 1; }
+    .toc-desc { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .1em; color: #aaa; text-align: right; flex-shrink: 0; }
+    .toc-foot { margin-top: 3rem; border-top: 1px solid #ddd; padding-top: 2rem; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: #bbb; text-align: center; }
+
+    /* SECTION */
+    #view-section { min-height: 100vh; background: var(--ivory); }
+    .section-nav { display: flex; align-items: center; justify-content: space-between; padding: 1.8rem 2.5rem; border-bottom: 1px solid #e8e4dc; }
+    .nav-back { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--bronze); background: none; border: none; cursor: pointer; padding: 0; transition: opacity .15s; }
+    .nav-back:hover { opacity: .6; }
+    .nav-title { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 300; font-size: .95rem; color: #aaa; letter-spacing: .04em; }
+    .section-body { max-width: 720px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .section-eyebrow { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; color: var(--bronze); display: block; margin-bottom: 1rem; }
+    .section-body h2 { font-weight: 300; font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: .02em; margin-bottom: .4rem; color: #111; }
+    .section-sub { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .65rem; letter-spacing: .16em; color: #aaa; display: block; margin-bottom: 2.5rem; text-transform: lowercase; }
+    .section-body p { font-size: clamp(.95rem, 2vw, 1.1rem); font-weight: 400; line-height: 1.8; color: #1a1a1a; margin-bottom: 1.4rem; }
+    .section-body p * { color: inherit !important; text-decoration: none !important; background: none !important; }
+    .section-body p:last-child { margin-bottom: 0; }
+
+    /* PARCEL TABLE */
+    .parcel-table { width: 100%; border-collapse: collapse; margin-top: 2rem; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .72rem; letter-spacing: .04em; color: #1a1a1a; }
+    .parcel-table thead tr { border-bottom: 1px solid #ccc; }
+    .parcel-table th { font-weight: 400; text-transform: uppercase; letter-spacing: .14em; font-size: .58rem; color: var(--bronze); padding: .5rem .75rem .75rem; text-align: left; }
+    .parcel-table td { padding: .65rem .75rem; vertical-align: top; border-bottom: 1px solid #e8e4dc; }
+    .parcel-table .group-head td { padding-top: 1.4rem; color: var(--dark); font-size: .68rem; letter-spacing: .1em; border-bottom: none; }
+    .parcel-table .total td { padding-top: 1.2rem; border-top: 1px solid #ccc; border-bottom: none; color: var(--dark); font-weight: 400; }
+
+    /* FORM */
+    .inquiry-form { margin-top: 2.4rem; display: flex; flex-direction: column; gap: 1.2rem; }
+    .field label { display: block; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; color: var(--bronze); margin-bottom: .45rem; }
+    .field input, .field textarea { width: 100%; background: transparent; border: none; border-bottom: 1px solid #ccc; color: var(--dark); font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: 1rem; padding: .4rem 0 .55rem; outline: none; transition: border-color .2s; -webkit-appearance: none; border-radius: 0; }
+    .field input:focus, .field textarea:focus { border-bottom-color: var(--bronze); }
+    .field textarea { resize: vertical; min-height: 5rem; }
+    .form-submit { margin-top: .6rem; display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .btn-submit { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .65rem; letter-spacing: .24em; text-transform: uppercase; color: var(--ivory); background: var(--dark); border: none; padding: .85rem 2.4rem; cursor: pointer; transition: background .2s; }
+    .btn-submit:hover { background: var(--bronze); }
+    .form-reassurance { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .1em; color: #aaa; }
+
+    @media (max-width: 560px) {
+      .toc-desc { display: none; }
+      .section-nav { padding: 1.4rem 1.2rem; }
+      .section-body { padding: 3rem 1.4rem 5rem; }
+    }
+  </style>
+</head>
+<body spellcheck="false">
+
+  <!-- HERO -->
+  <div id="view-hero" class="view active">
+    <div class="hero-photo"></div>
+    <div class="overlay"></div>
+    <div class="hero-content">
+      <span class="eyebrow">A Private Offering</span>
+      <h1>The Campus</h1>
+      <span class="place">Spearfish &middot; South Dakota</span>
+    </div>
+    <div class="hero-enter">
+      <button class="cta" onclick="showToc()">Enter</button>
+    </div>
+    <div class="hero-foot">Offered By - Brian Demsey</div>
+  </div>
+
+  <!-- TABLE OF CONTENTS -->
+  <div id="view-toc" class="view">
+    <div class="toc-inner">
+      <button class="nav-back" onclick="showView('view-hero')" style="margin-bottom:2.4rem;">&larr; A Private Offering</button>
+      <div class="toc-title">The Campus</div>
+      <div class="toc-place">Spearfish &nbsp;&middot;&nbsp; South Dakota</div>
+      <hr class="toc-rule">
+      <span class="toc-label">Contents</span>
+      <ul class="toc-list">
+        <li><a href="#" onclick="showSection('I'); return false;">
+          <span class="toc-num">I</span>
+          <span class="toc-name">Overview</span>
+          <span class="toc-desc">The assembled parcel</span>
+        </a></li>
+        <li><a href="#" onclick="showSection('II'); return false;">
+          <span class="toc-num">II</span>
+          <span class="toc-name">The Land</span>
+          <span class="toc-desc">12 lots &middot; 90.94 acres</span>
+        </a></li>
+        <li><a href="#" onclick="showSection('III'); return false;">
+          <span class="toc-num">III</span>
+          <span class="toc-name">Site &amp; Context</span>
+          <span class="toc-desc">Spearfish and the Northern Black Hills</span>
+        </a></li>
+        <li><a href="#" onclick="showSection('IV'); return false;">
+          <span class="toc-num">IV</span>
+          <span class="toc-name">The Opportunity</span>
+          <span class="toc-desc">A complete campus, ready to receive</span>
+        </a></li>
+        <li><a href="#" onclick="showSection('V'); return false;">
+          <span class="toc-num">V</span>
+          <span class="toc-name">Inquire</span>
+          <span class="toc-desc">A private introduction</span>
+        </a></li>
+      </ul>
+      <div class="toc-foot">Offered By - Brian Demsey</div>
+    </div>
+  </div>
+
+  <!-- SECTION VIEW -->
+  <div id="view-section" class="view">
+    <nav class="section-nav">
+      <button class="nav-back" onclick="showToc()">&larr; Contents</button>
+      <span class="nav-title" id="nav-title-text"></span>
+    </nav>
+    <div class="section-body" id="section-body" translate="no"></div>
+  </div>
+
+  <!-- SECTION TEMPLATES -->
+  <template id="tpl-I">
+    <span class="section-eyebrow">I &middot; Overview</span>
+    <h2>The Campus</h2>
+    <span class="section-sub">ninety acres above Spearfish Canyon</span>
+    <p>A contiguous ridge above Spearfish, South Dakota &mdash; twelve lots, nearly ninety-one acres, assembled and offered in their entirety. The site commands unobstructed views of Spearfish Canyon, the Black Hills, and the valley below.</p>
+    <p>The parcel is offered as a single acquisition: a private campus ready to receive a technology company, a family enterprise, or a corporate retreat of any scale. No subdivision. No phased release.</p>
+  </template>
+
+  <template id="tpl-II">
+    <span class="section-eyebrow">II &middot; The Land</span>
+    <h2>Parcel Schedule</h2>
+    <span class="section-sub">12 lots &middot; 90.94 acres &middot; offered in full</span>
+    <p>The Ridge is formed by three adjacent ownerships. All twelve lots transfer together.</p>
+    <table class="parcel-table" aria-label="Parcel schedule">
+      <thead><tr><th>Parcel ID</th><th>Address / Location</th><th style="text-align:right">Acres</th></tr></thead>
+      <tbody>
+        <tr class="group-head"><td colspan="3">Hemmingson &mdash; 2 lots, 54.06 ac</td></tr>
+        <tr><td>20000-00602-013-02</td><td>2230 Lookout Vista Rd</td><td style="text-align:right">30.75</td></tr>
+        <tr><td>20560-00602-010-00</td><td>2224 Lookout Vista Rd</td><td style="text-align:right">23.31</td></tr>
+        <tr class="group-head"><td colspan="3">Demsey &mdash; 1 lot, 2.00 ac</td></tr>
+        <tr><td>20560-00602-070-20</td><td>2111 Vantage Cir</td><td style="text-align:right">2.00</td></tr>
+        <tr class="group-head"><td colspan="3">Schmidt / BA-HA Trust &mdash; 9 lots, 34.88 ac</td></tr>
+        <tr><td>20000-00602-114-10</td><td></td><td style="text-align:right">10.42</td></tr>
+        <tr><td>20000-00602-020-05</td><td></td><td style="text-align:right">4.64</td></tr>
+        <tr><td>20560-00602-120-30</td><td></td><td style="text-align:right">4.39</td></tr>
+        <tr><td>20560-00602-100-30</td><td></td><td style="text-align:right">2.00</td></tr>
+        <tr><td>20560-00602-070-30</td><td></td><td style="text-align:right">3.34</td></tr>
+        <tr><td>20560-00602-060-00</td><td></td><td style="text-align:right">3.45</td></tr>
+        <tr><td>20560-00602-110-10</td><td></td><td style="text-align:right">2.14</td></tr>
+        <tr><td>20560-00602-110-20</td><td></td><td style="text-align:right">2.01</td></tr>
+        <tr><td>20560-00602-110-30</td><td></td><td style="text-align:right">2.49</td></tr>
+        <tr class="total"><td colspan="2">Total &mdash; 12 lots</td><td style="text-align:right">90.94</td></tr>
+      </tbody>
+    </table>
+  </template>
+
+  <template id="tpl-III">
+    <span class="section-eyebrow">III &middot; Site &amp; Context</span>
+    <h2>Spearfish, South Dakota</h2>
+    <span class="section-sub">a ridgeline above the canyon</span>
+    <p>The Campus sits on a ridge above Spearfish &mdash; a city at the northern entrance to the Black Hills, at the intersection of I-90 and US-85. Direct access to regional air service. Four seasons. No state income tax.</p>
+    <p>The ridge itself is elevated above the valley floor, with views across Spearfish Canyon and the surrounding hills. The site is private, quiet, and entirely within a single contiguous ownership once assembled.</p>
+  </template>
+
+  <template id="tpl-IV">
+    <span class="section-eyebrow">IV &middot; The Opportunity</span>
+    <h2>The Acquisition</h2>
+    <span class="section-sub">a complete campus, ready to receive</span>
+    <p>Technology companies and large corporations face an enduring challenge: recruiting and retaining exceptional people in markets where housing and quality of life are constrained. The Campus offers a different answer &mdash; a controlled environment, purpose-built for the people who matter most to the enterprise.</p>
+    <p>The site accommodates executive housing, corporate retreat facilities, or a full residential campus at a scale that is rare in any market and effectively unrepeatable in this one. The ninety-one acres are assembled. The ridge is singular.</p>
+    <p>The buyer retains Brian Demsey for complete implementation &mdash; site planning, development coordination, and the network required to build in this market.</p>
+  </template>
+
+  <template id="tpl-V">
+    <span class="section-eyebrow">V &middot; Inquire</span>
+    <h2>A Private Introduction</h2>
+    <span class="section-sub">offered by the owner</span>
+    <p>Inquiries are handled directly. There is no brokerage intermediary. A private introduction can be arranged for qualified parties.</p>
+    <form class="inquiry-form" action="#" method="post">
+      <div class="field"><label for="inq-name">Full name</label><input type="text" id="inq-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="inq-phone">Telephone</label><input type="tel" id="inq-phone" name="phone" autocomplete="tel"></div>
+      <div class="field"><label for="inq-email">Email</label><input type="email" id="inq-email" name="email" autocomplete="email" required></div>
+      <div class="field"><label for="inq-address">Mailing address</label><input type="text" id="inq-address" name="address" autocomplete="street-address"></div>
+      <div class="field"><label for="inq-note">Note</label><textarea id="inq-note" name="note" rows="4"></textarea></div>
+      <div class="form-submit">
+        <button type="submit" class="btn-submit">Send inquiry</button>
+        <span class="form-reassurance">Replies are sent from a personal address, usually within an hour.</span>
+      </div>
+    </form>
+  </template>
+
+  <script>
+    var sections = { I: 'Overview', II: 'The Land', III: 'Site & Context', IV: 'The Opportunity', V: 'Inquire' };
+
+    function showView(id) {
+      document.querySelectorAll('.view').forEach(function(v) { v.classList.remove('active'); });
+      document.getElementById(id).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+
+    function showToc() { showView('view-toc'); }
+
+    function showSection(num) {
+      var tpl = document.getElementById('tpl-' + num);
+      var body = document.getElementById('section-body');
+      while (body.firstChild) { body.removeChild(body.firstChild); }
+      body.appendChild(tpl.content.cloneNode(true));
+      document.getElementById('nav-title-text').textContent = sections[num];
+      showView('view-section');
+    }
+  </script>
+
+</body>
+</html>

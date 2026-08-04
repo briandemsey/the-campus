@@ -276,7 +276,12 @@
             if (data.success) {
               form.reset();
               btn.style.display = 'none';
-              msg.style.color = '#5a8a6a';
+              msg.style.color = '#0e1512';
+              msg.style.fontSize = '1.1rem';
+              msg.style.fontFamily = "'Cormorant Garamond', Georgia, serif";
+              msg.style.fontWeight = '300';
+              msg.style.letterSpacing = '.02em';
+              msg.style.lineHeight = '1.7';
               msg.textContent = 'Your inquiry has been received. You will hear back shortly.';
             } else {
               throw new Error(data.message || 'Submission failed.');

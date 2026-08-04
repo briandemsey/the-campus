@@ -216,15 +216,15 @@
     <h2>A Private Introduction</h2>
     <span class="section-sub">offered by the owner</span>
     <p>Inquiries are handled directly. There is no brokerage intermediary. A private introduction can be arranged for qualified parties.</p>
-    <form class="inquiry-form" action="#" method="post">
+    <form class="inquiry-form" id="inquiry-form">
       <div class="field"><label for="inq-name">Full name</label><input type="text" id="inq-name" name="name" autocomplete="name" required></div>
       <div class="field"><label for="inq-phone">Telephone</label><input type="tel" id="inq-phone" name="phone" autocomplete="tel"></div>
       <div class="field"><label for="inq-email">Email</label><input type="email" id="inq-email" name="email" autocomplete="email" required></div>
       <div class="field"><label for="inq-address">Mailing address</label><input type="text" id="inq-address" name="address" autocomplete="street-address"></div>
       <div class="field"><label for="inq-note">Note</label><textarea id="inq-note" name="note" rows="4"></textarea></div>
       <div class="form-submit">
-        <button type="submit" class="btn-submit">Send inquiry</button>
-        <span class="form-reassurance">Replies are sent from a personal address, usually within an hour.</span>
+        <button type="submit" class="btn-submit" id="inq-submit">Send inquiry</button>
+        <span class="form-reassurance" id="inq-note-msg">Replies are sent from a personal address, usually within an hour.</span>
       </div>
     </form>
   </template>
@@ -247,6 +247,48 @@
       body.appendChild(tpl.content.cloneNode(true));
       document.getElementById('nav-title-text').textContent = sections[num];
       showView('view-section');
+      if (num === 'V') { wireInquiryForm(); }
+    }
+
+    function wireInquiryForm() {
+      var form = document.getElementById('inquiry-form');
+      var btn  = document.getElementById('inq-submit');
+      var msg  = document.getElementById('inq-note-msg');
+      if (!form) return;
+
+      form.addEventListener('submit', function(ev) {
+        ev.preventDefault();
+        if (!form.reportValidity()) return;
+
+        btn.disabled = true;
+        btn.textContent = 'Sending…';
+        msg.style.color = '';
+        msg.textContent = '';
+
+        var fd = new FormData(form);
+        fd.append('access_key', '094b4d7e-981d-46a7-bbdc-254071bdde27');
+        fd.append('subject', 'Inquiry — The Campus');
+        fd.append('from_name', 'the-campus.luxuryproperty-southdakota.com');
+
+        fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd })
+          .then(function(r) { return r.json(); })
+          .then(function(data) {
+            if (data.success) {
+              form.reset();
+              btn.style.display = 'none';
+              msg.style.color = '#5a8a6a';
+              msg.textContent = 'Your inquiry has been received. You will hear back shortly.';
+            } else {
+              throw new Error(data.message || 'Submission failed.');
+            }
+          })
+          .catch(function(err) {
+            btn.disabled = false;
+            btn.textContent = 'Send inquiry';
+            msg.style.color = '#a04040';
+            msg.textContent = 'There was a problem sending your inquiry. Please try again or email directly.';
+          });
+      });
     }
   </script>
 

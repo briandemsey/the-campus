@@ -9,7 +9,7 @@
   <title>The Campus — A Private Offering · Spearfish, South Dakota</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,700;1,700&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
   <style>
     :root {
       --hero: url('hero.png');
@@ -32,7 +32,7 @@
     .hero-content { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: .9rem; }
     .hero-enter { position: absolute; left: 0; bottom: 0; padding: 2.8rem 3.2rem; }
     .eyebrow { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .95rem; letter-spacing: .28em; text-transform: uppercase; color: var(--bronze); }
-    .hero-content h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-size: clamp(3.2rem, 8vw, 6.4rem); line-height: 1; letter-spacing: .04em; color: var(--ivory); }
+    .hero-content h1 { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-size: clamp(3.2rem, 8vw, 6.4rem); line-height: 1; letter-spacing: .04em; color: var(--ivory); }
     .place { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .95rem; letter-spacing: .22em; text-transform: uppercase; color: var(--ivory-dim); }
     .lede { display: none; }
     .cta { display: inline-block; margin-top: .4rem; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .68rem; letter-spacing: .28em; text-transform: uppercase; color: var(--ivory); text-decoration: none; border-bottom: 1px solid rgba(200,169,126,.6); padding-bottom: 2px; cursor: pointer; background: none; border-top: none; border-left: none; border-right: none; transition: color .2s, border-color .2s; }
@@ -42,30 +42,30 @@
     /* TOC */
     #view-toc { min-height: 100vh; background: var(--ivory); padding: 5rem 0 4rem; }
     .toc-inner { max-width: 640px; margin: 0 auto; padding: 0 2rem; }
-    .toc-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 400; font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--dark); margin-bottom: .3rem; }
-    .toc-place { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: #999; }
+    .toc-title { font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 700; font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem); color: var(--dark); margin-bottom: .3rem; }
+    .toc-place { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .62rem; letter-spacing: .22em; text-transform: uppercase; color: #999; }
     .toc-rule { border: none; border-top: 1px solid #ddd; margin: 2rem 0; }
-    .toc-label { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: var(--bronze); text-align: center; display: block; margin-bottom: 1.8rem; }
+    .toc-label { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .62rem; letter-spacing: .26em; text-transform: uppercase; color: var(--bronze); text-align: center; display: block; margin-bottom: 1.8rem; }
     .toc-list { list-style: none; }
     .toc-list li { border-top: 1px solid #ddd; }
     .toc-list li:last-child { border-bottom: 1px solid #ddd; }
     .toc-list a { display: flex; align-items: baseline; gap: 1.5rem; padding: 1.2rem 0; text-decoration: none; color: inherit; transition: opacity .15s; }
     .toc-list a:hover { opacity: .6; }
-    .toc-num { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .65rem; letter-spacing: .12em; color: var(--bronze); flex-shrink: 0; width: 1.8rem; }
-    .toc-name { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; font-size: 1.35rem; color: var(--dark); flex: 1; }
-    .toc-desc { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .1em; color: #555; text-align: right; flex-shrink: 0; }
-    .toc-foot { margin-top: 3rem; border-top: 1px solid #ddd; padding-top: 2rem; font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: #bbb; text-align: center; }
+    .toc-num { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .65rem; letter-spacing: .12em; color: var(--bronze); flex-shrink: 0; width: 1.8rem; }
+    .toc-name { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: 1.35rem; color: var(--dark); flex: 1; }
+    .toc-desc { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .6rem; letter-spacing: .1em; color: #555; text-align: right; flex-shrink: 0; }
+    .toc-foot { margin-top: 3rem; border-top: 1px solid #ddd; padding-top: 2rem; font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: #bbb; text-align: center; }
 
     /* SECTION */
     #view-section { min-height: 100vh; background: var(--ivory); }
     .section-nav { display: flex; align-items: center; justify-content: space-between; padding: 1.8rem 2.5rem; border-bottom: 1px solid #e8e4dc; }
-    .nav-back { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--bronze); background: none; border: none; cursor: pointer; padding: 0; transition: opacity .15s; }
+    .nav-back { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--bronze); background: none; border: none; cursor: pointer; padding: 0; transition: opacity .15s; }
     .nav-back:hover { opacity: .6; }
-    .nav-title { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 400; font-size: .95rem; color: #aaa; letter-spacing: .04em; }
+    .nav-title { font-family: 'Cormorant Garamond', Georgia, serif; font-style: italic; font-weight: 700; font-size: .95rem; color: #aaa; letter-spacing: .04em; }
     .section-body { max-width: 720px; margin: 0 auto; padding: 5rem 2rem 6rem; }
-    .section-eyebrow { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; color: var(--bronze); display: block; margin-bottom: 1rem; }
-    .section-body h2 { font-weight: 400; font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: .02em; margin-bottom: .4rem; color: #111; }
-    .section-sub { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .65rem; letter-spacing: .16em; color: #666; display: block; margin-bottom: 2.5rem; text-transform: lowercase; }
+    .section-eyebrow { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .6rem; letter-spacing: .26em; text-transform: uppercase; color: var(--bronze); display: block; margin-bottom: 1rem; }
+    .section-body h2 { font-weight: 700; font-size: clamp(1.8rem, 4vw, 2.6rem); letter-spacing: .02em; margin-bottom: .4rem; color: #111; }
+    .section-sub { font-family: 'Montserrat', sans-serif; font-weight: 400; font-size: .65rem; letter-spacing: .16em; color: #666; display: block; margin-bottom: 2.5rem; text-transform: lowercase; }
     .section-body p { font-size: clamp(1.05rem, 2vw, 1.2rem); font-weight: 600; line-height: 1.8; color: #000; margin-bottom: 1.4rem; }
     .section-body p, .section-body p *, .section-sub, .section-sub * { color: inherit !important; text-decoration: none !important; background: none !important; }
     .section-body p:last-child { margin-bottom: 0; }

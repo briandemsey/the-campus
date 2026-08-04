@@ -93,7 +93,7 @@
     .btn-submit { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .65rem; letter-spacing: .24em; text-transform: uppercase; color: var(--ivory); background: var(--dark); border: none; padding: .85rem 2.4rem; cursor: pointer; transition: background .2s; }
     .btn-submit:hover { background: var(--bronze); }
     .form-reassurance { font-family: 'Montserrat', sans-serif; font-weight: 300; font-size: .6rem; letter-spacing: .1em; color: #aaa; }
-    .form-success { font-family: 'Cormorant Garamond', Georgia, serif !important; font-weight: 300 !important; font-size: 1.2rem !important; letter-spacing: .02em !important; line-height: 1.7 !important; color: #0e1512 !important; }
+    #inq-success { display: none; margin-top: 2.4rem; font-family: 'Cormorant Garamond', Georgia, serif; font-weight: 300; font-size: 1.35rem; line-height: 1.7; letter-spacing: .02em; color: #0e1512; }
 
     @media (max-width: 560px) {
       .toc-desc { display: none; }
@@ -228,6 +228,7 @@
         <span class="form-reassurance" id="inq-note-msg">Replies are sent from a personal address, usually within an hour.</span>
       </div>
     </form>
+    <div id="inq-success">Your inquiry has been received. You will hear back shortly.</div>
   </template>
 
   <script>
@@ -252,9 +253,10 @@
     }
 
     function wireInquiryForm() {
-      var form = document.getElementById('inquiry-form');
-      var btn  = document.getElementById('inq-submit');
-      var msg  = document.getElementById('inq-note-msg');
+      var form    = document.getElementById('inquiry-form');
+      var btn     = document.getElementById('inq-submit');
+      var noteMsg = document.getElementById('inq-note-msg');
+      var success = document.getElementById('inq-success');
       if (!form) return;
 
       form.addEventListener('submit', function(ev) {
@@ -263,8 +265,6 @@
 
         btn.disabled = true;
         btn.textContent = 'Sending…';
-        msg.style.color = '';
-        msg.textContent = '';
 
         var fd = new FormData(form);
         fd.append('access_key', '094b4d7e-981d-46a7-bbdc-254071bdde27');
@@ -275,10 +275,8 @@
           .then(function(r) { return r.json(); })
           .then(function(data) {
             if (data.success) {
-              form.reset();
-              btn.style.display = 'none';
-              msg.className = 'form-success';
-              msg.textContent = 'Your inquiry has been received. You will hear back shortly.';
+              form.style.display = 'none';
+              success.style.display = 'block';
             } else {
               throw new Error(data.message || 'Submission failed.');
             }
@@ -286,8 +284,8 @@
           .catch(function(err) {
             btn.disabled = false;
             btn.textContent = 'Send inquiry';
-            msg.style.color = '#a04040';
-            msg.textContent = 'There was a problem sending your inquiry. Please try again or email directly.';
+            noteMsg.style.color = '#a04040';
+            noteMsg.textContent = 'There was a problem sending your inquiry. Please try again or email directly.';
           });
       });
     }
